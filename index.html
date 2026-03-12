@@ -9,10 +9,8 @@
     <meta name="theme-color" content="#3E2723">
     <meta name="description" content="تقویم شاهنشاهی ایران باستان با مناسبت‌های ایرانی">
     
-    <!-- PWA Manifest -->
     <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoi2KrZgtuI24zZhSDYtNin2YfZhtiz2YfYp9mH24wg2KfbjNix2KfZhiIsInNob3J0X25hbWUiOiLYqtuC2YjbjNmFINi02KfZh9mG2LTYp9mH24wiLCJzdGFydF91cmwiOiIuIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiIzNFMjcyMyIsInRoZW1lX2NvbG9yIjoiI0Q0QUYzNyIsIm9yaWVudGF0aW9uIjoicG9ydHJhaXQiLCJpY29ucyI6W3sic3JjIjoiZGF0YTppbWFnZS9zdmcreG1sLCUzQ3N2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxOTInIGhlaWdodD0nMTkyJyUzRSUzQ3JlY3Qgd2lkdGg9JzE5MicgaGVpZ2h0PScxOTInIGZpbGw9JyUyMzNFMjcyMycvJTNFJTNDdGV4dCB4PSc1MCUyNScgeT0nNTAlMjUnIGZvbnQtc2l6ZT0nOTAnIHRleHQtYW5jaG9yPSdtaWRkbGUnIGR5PScuM2VtJyBmaWxsPSclMjNENEFGMzcnJTNFJUYwJTlGJUE2JTgxJUYwJTlGJThDJTlFJTNDL3RleHQlM0UlM0Mvc3ZnJTNFIiwic2l6ZXMiOiIxOTJ4MTkyIiwidHlwZSI6ImltYWdlL3N2Zyt4bWwifV19">
     
-    <!-- Icons -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦁</text></svg>">
     <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='192' height='192'><rect width='192' height='192' fill='%233E2723'/><text x='50%' y='50%' font-size='90' text-anchor='middle' dy='.3em' fill='%23D4AF37'>🦁🌞</text></svg>">
     
@@ -186,20 +184,34 @@
         .month-header {
             text-align: center;
             margin-bottom: 25px;
-            padding: 30px 20px;
+            padding: 30px 20px 30px;
             border-radius: 12px;
             border: 2px solid var(--primary-gold);
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
-            min-height: 180px;
+            min-height: 160px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
         }
 
-        /* پس‌زمینه عکس نماد - opacity بیشتر برای وضوح */
+        /* دایره رنگ ماه — بغل اسم ماه */
+        .month-color-dot {
+            display: inline-block;
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(255,255,255,0.4);
+            box-shadow: 0 0 5px rgba(0,0,0,0.5);
+            vertical-align: middle;
+            margin-right: 10px;
+            margin-left: 4px;
+            flex-shrink: 0;
+        }
+
+        /* پس‌زمینه عکس نماد */
         .month-header::before {
             content: '';
             position: absolute;
@@ -208,12 +220,12 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            opacity: 0.62;
+            opacity: 0.85;
             z-index: 0;
             transition: opacity 0.4s ease;
         }
 
-        /* لایه رنگی روی عکس - کمی کمتر تا عکس معلوم بشه */
+        /* لایه رنگی روی عکس */
         .month-header::after {
             content: '';
             position: absolute;
@@ -238,29 +250,6 @@
             background: linear-gradient(135deg, rgba(212,175,55,0.08) 0%, rgba(212,175,55,0.03) 100%);
         }
 
-        .month-symbol-placeholder {
-            font-size: 13px;
-            color: var(--light-brown);
-            border: 1px dashed rgba(212,175,55,0.3);
-            border-radius: 8px;
-            padding: 6px 14px;
-            margin-bottom: 10px;
-            background: rgba(0,0,0,0.2);
-        }
-
-        .month-color-badge {
-            display: inline-block;
-            padding: 5px 14px;
-            border-radius: 20px;
-            font-size: 13px;
-            margin: 10px auto 10px;
-            font-family: 'Scheherazade New', serif;
-            color: var(--cream) !important;
-            background: rgba(0,0,0,0.35) !important;
-            border: 1px solid rgba(255,255,255,0.25) !important;
-            backdrop-filter: blur(4px);
-        }
-
         .month-name {
             font-size: 28px;
             font-weight: 700;
@@ -276,6 +265,43 @@
             line-height: 1.7;
             margin-top: 8px;
             text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+        }
+
+        /* پاورقی نماد ماه */
+        .symbol-footnote {
+            margin-top: 18px;
+            padding: 10px 16px;
+            background: rgba(0,0,0,0.25);
+            border-radius: 8px;
+            border-right: 3px solid rgba(212,175,55,0.4);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .footnote-marker {
+            font-size: 11px;
+            color: var(--primary-gold);
+            opacity: 0.7;
+            white-space: nowrap;
+            padding-top: 2px;
+            font-style: italic;
+            flex-shrink: 0;
+        }
+
+        .footnote-text {
+            font-size: 12px;
+            color: var(--light-brown);
+            line-height: 1.7;
+            font-style: italic;
+        }
+
+        .footnote-title {
+            font-size: 12px;
+            color: rgba(212,175,55,0.75);
+            font-weight: 700;
+            margin-bottom: 2px;
+            font-style: normal;
         }
 
         .calendar-grid {
@@ -489,7 +515,6 @@
 <body>
     <div class="background-pattern"></div>
     
-    <!-- بنر نصب PWA -->
     <div class="install-banner" id="installBanner">
         <div>📱 این تقویم را به صفحه اصلی گوشی خود اضافه کنید</div>
         <button class="install-btn" id="installBtn">نصب اپلیکیشن</button>
@@ -546,7 +571,6 @@
     </div>
 
     <script>
-        // PWA Installation
         let deferredPrompt;
         const installBanner = document.getElementById('installBanner');
         const installBtn = document.getElementById('installBtn');
@@ -562,22 +586,20 @@
                 alert('برای نصب:\n۱. روی دکمه Share (↗️) کلیک کنید\n۲. گزینه "Add to Home Screen" را انتخاب کنید');
                 return;
             }
-            
             deferredPrompt.prompt();
             const { outcome } = await deferredPrompt.userChoice;
             deferredPrompt = null;
             installBanner.classList.remove('show');
         });
 
-        // داده‌های تقویم
         const monthsData = [
             {
                 name: 'فروردین',
                 days: 31,
                 color: '#4CAF50',
-                colorName: 'سبز روشن',
                 symbol: 'https://raw.githubusercontent.com/tganga369/tganga369.github.io/refs/heads/main/images/farvardin.jpg',
-                symbolDesc: 'فروهر، پرنده و جوانه',
+                symbolTitle: 'فروهر',
+                symbolDesc: 'فروهر نماد روح انسان کامل در آیین زرتشتی است — موجودی بالدار که نشان‌دهنده پیشرفت روح به سوی اهورامزداست. هر ایرانی را فروهری هست که راهنما و نگهبان اوست.',
                 info: 'یادگار رستاخیز سیاوش است و احترام به طبیعت و نیروهای خیر',
                 events: [
                     { day: 1, name: 'نوروز باستانی', desc: 'جشن آغاز سال نو و تجدید حیات طبیعت', holiday: true },
@@ -595,9 +617,9 @@
                 name: 'اردیبهشت',
                 days: 31,
                 color: '#FFFFFF',
-                colorName: 'سفید',
                 symbol: 'https://raw.githubusercontent.com/tganga369/tganga369.github.io/refs/heads/main/images/ordibehesht.jpg',
-                symbolDesc: 'چشمه و آب پاک',
+                symbolTitle: 'چشمه و آب پاک',
+                symbolDesc: 'آب در فرهنگ ایران باستان مقدس‌ترین عنصر پس از آتش است. چشمه‌های جوشان نماد پاکی، تازگی و بخشش الهی‌اند. اردیبهشت ایزد آتش پاک و حافظ راستی است.',
                 info: 'نماد تقدس آتش، پاکیزگی و جشن گل‌هاست که ریشه‌ای عمیق در فرهنگ شاهنشاهی ایرانیان دارد',
                 events: [
                     { day: 1, name: 'روز بزرگداشت سعدی', desc: 'گرامیداشت شاعر و ادیب بزرگ ایران زمین، سعدی شیرازی', holiday: false },
@@ -615,9 +637,9 @@
                 name: 'خرداد',
                 days: 31,
                 color: '#2196F3',
-                colorName: 'آبی',
                 symbol: 'https://raw.githubusercontent.com/tganga369/tganga369.github.io/refs/heads/main/images/khordad.jpg',
-                symbolDesc: 'برگ سبز و آبراه',
+                symbolTitle: 'برگ سبز و آبراه',
+                symbolDesc: 'خرداد به معنی کمال و رسایی است. آب‌راه‌ها و کاریزها نماد مهندسی ایرانیان باستان برای مدیریت آب‌اند — سامانه‌ای که هزاران سال پیش ساخته شد و هنوز در برخی روستاها جاری است.',
                 info: 'ماه پاسداشت آب‌های روان، سرسبزی، و ساخت کاریزها',
                 events: [
                     { day: 1, name: 'روز بهرام', desc: 'جشن پیروزی و قهرمانی', holiday: false },
@@ -630,9 +652,9 @@
                 name: 'تیر',
                 days: 31,
                 color: '#00BCD4',
-                colorName: 'فیروزه‌ای',
                 symbol: 'https://raw.githubusercontent.com/tganga369/tganga369.github.io/refs/heads/main/images/tir.jpg',
-                symbolDesc: 'آرش کمانگیر',
+                symbolTitle: 'آرش کمانگیر',
+                symbolDesc: 'آرش کمانگیر پهلوان اساطیری ایران است که تیری انداخت تا مرز ایران را از تورانیان باز پس گیرد — جانش را در آن تیر نهاد. نماد فداکاری برای وطن.',
                 info: 'ماه پیوند ایرانیان با طبیعت',
                 events: [
                     { day: 1, name: 'جشن آب‌ریزان', desc: 'جشن ریختن آب بر یکدیگر در گرمای تابستان', holiday: false },
@@ -645,9 +667,9 @@
                 name: 'مرداد',
                 days: 31,
                 color: '#FFC107',
-                colorName: 'طلایی',
                 symbol: 'https://raw.githubusercontent.com/tganga369/tganga369.github.io/refs/heads/main/images/mordad.jpg',
-                symbolDesc: 'شیر و خورشید',
+                symbolTitle: 'شیر و خورشید',
+                symbolDesc: 'نشان شیر و خورشید قدیمی‌ترین نماد ملی ایران است که ریشه در دوران هخامنشی و شاید پیش از آن دارد. شیر نماد شجاعت و خورشید نماد روشنایی و شاهی است.',
                 info: 'ماه بی‌مرگی',
                 events: [
                     { day: 4, name: 'سالگرد درگذشت رضاشاه بزرگ', desc: 'یادبود بنیانگذار ایران نوین، رضاشاه کبیر', holiday: false },
@@ -663,9 +685,9 @@
                 name: 'شهریور',
                 days: 31,
                 color: '#9C27B0',
-                colorName: 'بنفش',
                 symbol: 'https://raw.githubusercontent.com/tganga369/tganga369.github.io/refs/heads/main/images/shahrivar.jpg',
-                symbolDesc: 'تاج و کوه',
+                symbolTitle: 'تاج و کوه',
+                symbolDesc: 'شهریور ایزد نگهبان فلزات و آرمان‌شهر است. کوه در فرهنگ ایران نماد ثبات، بلندی همت و پیوند زمین و آسمان است. تاج نشانه عدالت و حاکمیت دادگرانه.',
                 info: 'ماه برنامه‌ریزی برای پاییزی شکوفا',
                 events: [
                     { day: 1, name: 'بزرگداشت ابوعلی سینا - جشن آتش', desc: 'گرامیداشت شیخ‌الرئیس ابوعلی سینا، پزشک و فیلسوف بزرگ ایرانی', holiday: false },
@@ -681,9 +703,9 @@
                 name: 'مهر',
                 days: 30,
                 color: '#FF9800',
-                colorName: 'نارنجی',
                 symbol: 'https://raw.githubusercontent.com/tganga369/tganga369.github.io/refs/heads/main/images/mehr.jpg',
-                symbolDesc: 'خورشید و درفش کاویانی',
+                symbolTitle: 'خورشید و درفش کاویانی',
+                symbolDesc: 'درفش کاویانی پرچم اساطیری ایران است که کاوه آهنگر آن را برافراشت. خورشید نماد میترا، ایزد پیمان و دوستی است — مهر به معنی هم خورشید است هم محبت.',
                 info: 'ماه ستایش پیمان، دوستی و روشنایی',
                 events: [
                     { day: 2, name: 'جشن قالیشویان', desc: 'جشن شستن قالی‌ها', holiday: false },
@@ -698,15 +720,15 @@
                 name: 'آبان',
                 days: 30,
                 color: '#1565C0',
-                colorName: 'آبی تیره',
                 symbol: 'https://raw.githubusercontent.com/tganga369/tganga369.github.io/refs/heads/main/images/aban.jpg',
-                symbolDesc: 'مقبره کوروش و استوانه حقوق بشر',
-                info: 'ماه شاهان؛ ترکیبی از احترام به طبیعت (آب) و افتخار به تاریخ ملی (کوروش بزرگ) است که در آن، پاکیزگی عناصر طبیعی در کنار بزرگی پادشاهان عادل گرامی داشته می‌شود',
+                symbolTitle: 'مقبره کوروش و استوانه حقوق بشر',
+                symbolDesc: 'استوانه کوروش (۵۳۹ پیش از میلاد) نخستین منشور حقوق بشر جهان است. کوروش بزرگ پس از فتح بابل آزادی دین و بازگشت مردمان به وطنشان را اعلام کرد.',
+                info: 'ماه شاهان؛ ترکیبی از احترام به طبیعت (آب) و افتخار به تاریخ ملی (کوروش بزرگ)',
                 events: [
                     { day: 1, name: 'جشن میترکانا', desc: 'جشن کهن مهر و میترا', holiday: false },
-                    { day: 7, name: 'بزرگداشت کوروش بزرگ و فتح بابل', desc: 'یادبود کوروش بزرگ، بنیانگذار امپراتوری هخامنشی و فاتح بابل، پادشاهی که منشور حقوق بشر را صادر کرد', holiday: false },
+                    { day: 7, name: 'بزرگداشت کوروش بزرگ و فتح بابل', desc: 'یادبود کوروش بزرگ، بنیانگذار امپراتوری هخامنشی و فاتح بابل', holiday: false },
                     { day: 10, name: 'آبانگان - روز پاکی و روشنایی', desc: 'جشن بزرگ آبان، ایزدبانوی آب و پاکی', holiday: false },
-                    { day: 15, name: 'جشن میانه پاییز', desc: 'یکی از جشن‌های دوازده‌گانه گاهنباری - جشن میانه پاییز', holiday: false },
+                    { day: 15, name: 'جشن میانه پاییز', desc: 'یکی از جشن‌های دوازده‌گانه گاهنباری', holiday: false },
                     { day: 19, name: 'فروردین روز', desc: 'یاد فروهر', holiday: false },
                     { day: 24, name: 'روز دین', desc: 'جشن دین و مذهب', holiday: false }
                 ]
@@ -715,9 +737,9 @@
                 name: 'آذر',
                 days: 30,
                 color: '#F44336',
-                colorName: 'قرمز',
                 symbol: 'https://raw.githubusercontent.com/tganga369/tganga369.github.io/refs/heads/main/images/azar.jpg',
-                symbolDesc: 'شعله و آتش',
+                symbolTitle: 'شعله و آتش',
+                symbolDesc: 'آتش در آیین زرتشتی نماد روشنایی اهورامزدا و راستی است — نه معبود، بلکه قبله‌ای برای توجه به خدا. آتشکده‌های ایران باستان پاسدار این نور مقدس بودند.',
                 info: 'ماه ستایش آتش و روشنایی',
                 events: [
                     { day: 1, name: 'آذر روز', desc: 'جشن آذر (آتش)', holiday: false },
@@ -732,21 +754,21 @@
                 name: 'دی',
                 days: 30,
                 color: '#CFD8DC',
-                colorName: 'نقره‌ای',
                 symbol: 'https://raw.githubusercontent.com/tganga369/tganga369.github.io/refs/heads/main/images/dey.jpg',
-                symbolDesc: 'ستاره صبح',
+                symbolTitle: 'ستاره صبح',
+                symbolDesc: 'ستاره صبح (ناهید یا زهره) در فرهنگ ایران نماد امید در تاریکی و بشارت روشنایی است. دی ماه که تاریک‌ترین ماه سال است، با نور این ستاره و افزایش تدریجی روز معنا می‌یابد.',
                 info: 'ماه استراحت و گرامی‌داشت افزایش نور خورشید',
                 events: [
                     { day: 1, name: 'دیگان - روز برابری و همدلی', desc: 'جشن آفریدگار (اهورامزدا)؛ روز برابری و همدلی میان مردمان', holiday: true },
                     { day: 3, name: 'روز اقدامات شاهنشاه', desc: 'گرامیداشت اقدامات و اصلاحات شاهنشاه', holiday: false },
-                    { day: 4, name: 'جشن کریسمس (ارامنه)', desc: 'گرامیداشت کریسمس برای هم‌وطنان ارمنی؛ نشانه تعامل و همزیستی فرهنگی', holiday: false },
+                    { day: 4, name: 'جشن کریسمس (ارامنه)', desc: 'گرامیداشت کریسمس برای هم‌وطنان ارمنی', holiday: false },
                     { day: 5, name: 'روز درگذشت زرتشت', desc: 'یادبود پیامبر زرتشت', holiday: false },
                     { day: 8, name: 'دیگان - ادامه جشن', desc: 'دی به آذر - ادامه جشن‌های دیگان', holiday: false },
-                    { day: 11, name: 'آغاز سال نو میلادی', desc: 'گرامیداشت سال نو میلادی و تعامل با تقویم جهانی', holiday: false },
+                    { day: 11, name: 'آغاز سال نو میلادی', desc: 'گرامیداشت سال نو میلادی', holiday: false },
                     { day: 14, name: 'جشن سیر', desc: 'جشن سیر، یکی از جشن‌های کهن زمستانی', holiday: false },
                     { day: 15, name: 'دیگان - ادامه جشن', desc: 'دی به مهر - ادامه جشن‌های دیگان', holiday: false },
                     { day: 16, name: 'بزرگداشت فریدون', desc: 'یادبود فریدون، پادشاه اسطوره‌ای و نماد دادگری در شاهنامه', holiday: false },
-                    { day: 17, name: 'یادبود درگذشت بابک خرمدین', desc: 'یادبود بابک خرمدین، قهرمان مقاومت ایرانی در برابر بیگانگان', holiday: false },
+                    { day: 17, name: 'یادبود درگذشت بابک خرمدین', desc: 'یادبود بابک خرمدین، قهرمان مقاومت ایرانی', holiday: false },
                     { day: 23, name: 'دیگان - ادامه جشن', desc: 'دی به دین - ادامه جشن‌های دیگان', holiday: false }
                 ]
             },
@@ -754,14 +776,14 @@
                 name: 'بهمن',
                 days: 30,
                 color: '#388E3C',
-                colorName: 'سبز تیره',
                 symbol: 'https://raw.githubusercontent.com/tganga369/tganga369.github.io/refs/heads/main/images/bahman.jpg',
-                symbolDesc: 'گاو و سبزه',
+                symbolTitle: 'گاو و سبزه',
+                symbolDesc: 'بهمن ایزد نگهبان حیوانات سودمند و اندیشه نیک است. گاو در فرهنگ ایران باستان نماد کشاورزی، فراوانی و پیوند انسان با طبیعت است. سبزه نشانه امید به بازگشت بهار.',
                 info: 'ماه اندیشه‌ورزی و گرمایش',
                 events: [
                     { day: 2, name: 'بهمنگان - گرامیداشت حیوانات', desc: 'جشن بهمن، ایزد نگهبان حیوانات و مردمان', holiday: true },
                     { day: 5, name: 'جشن نوسده', desc: 'صد روز مانده به نوروز، جشن نوسده', holiday: false },
-                    { day: 10, name: 'جشن سده', desc: 'جشن بزرگ سده، یکصد روز و یکصد شب مانده به نوروز، جشن آتش در سرمای زمستان', holiday: true },
+                    { day: 10, name: 'جشن سده', desc: 'جشن بزرگ سده، یکصد روز و یکصد شب مانده به نوروز', holiday: true },
                     { day: 17, name: 'روز اشتاد', desc: 'بزرگداشت راستی', holiday: false },
                     { day: 22, name: 'روز انیران', desc: 'یاد ایرانیان', holiday: false }
                 ]
@@ -770,9 +792,9 @@
                 name: 'اسفند',
                 days: 29,
                 color: '#E91E63',
-                colorName: 'صورتی',
                 symbol: 'https://raw.githubusercontent.com/tganga369/tganga369.github.io/refs/heads/main/images/esfand.jpg',
-                symbolDesc: 'زمین و درختان',
+                symbolTitle: 'زمین و درختان',
+                symbolDesc: 'سپندارمذ ایزدبانوی زمین، فروتنی و عشق وفادار است. درختان در پایان زمستان نماد مقاومت و بازگشت زندگی‌اند. اسفند ماه خداحافظی با تاریکی و استقبال از نوروز است.',
                 info: 'ماه ایزدبانوی نگهبان زمین و ماه بدرود با سرما و تاریکی',
                 events: [
                     { day: 1, name: 'جشن اسفندگان', desc: 'جشن اسفند (ایزد بانوی زمین)', holiday: false },
@@ -783,7 +805,7 @@
                     { day: 19, name: 'جشن فروردگان', desc: 'بزرگداشت روان درگذشتگان', holiday: false },
                     { day: 24, name: 'روز مرد - زادروز رضاشاه بزرگ', desc: 'گرامیداشت رضاشاه کبیر، بنیانگذار ایران نوین؛ روز مرد و پدر', holiday: false },
                     { day: 25, name: 'جشن نوروز پیشینیان', desc: 'نوروز باستانی پیش از اصلاحات', holiday: false },
-                    { day: 29, name: 'روز آفرینش مردمان', desc: 'آخرین روز سال، روز بدرود با سال کهنه و آماده‌باش برای تولد دوباره', holiday: true }
+                    { day: 29, name: 'روز آفرینش مردمان', desc: 'آخرین روز سال، روز بدرود با سال کهنه', holiday: true }
                 ]
             }
         ];
@@ -828,23 +850,20 @@
                 document.documentElement.style.setProperty('--month-bg-image', 'none');
             }
 
-            const placeholderHtml = isPlaceholder
-                ? `<div class="month-symbol-placeholder">📷 جای عکس نماد — ${month.symbolDesc}</div>`
-                : '';
-
             const brightColors = ['#FFFFFF', '#CFD8DC'];
             const nameColor = brightColors.includes(month.color) ? 'var(--primary-gold)' : month.color;
 
             let html = `
                 <div class="month-header ${isPlaceholder ? 'no-image' : ''}" style="border-color: ${month.color};">
-                    ${placeholderHtml}
-                    <div class="month-name" style="color: ${nameColor};">${month.name}</div>
-                    <div class="month-color-badge">● ${month.colorName} — ${month.symbolDesc}</div>
+                    <div class="month-name" style="color: ${nameColor}; display:flex; align-items:center; justify-content:center;">
+                        <span class="month-color-dot" style="background:${month.color};"></span>${month.name}
+                    </div>
                     <div class="month-info">${month.info}</div>
                 </div>
-                
-                <div class="calendar-grid">
             `;
+
+            // گرید تقویم
+            html += `<div class="calendar-grid">`;
 
             weekDays.forEach(day => {
                 html += `<div class="day-header">${day}</div>`;
@@ -877,6 +896,7 @@
 
             html += `</div>`;
 
+            // مناسبت‌ها
             if (month.events.length > 0) {
                 html += `
                     <div class="events-section">
@@ -896,10 +916,20 @@
                 html += `</div>`;
             }
 
+            // پاورقی نماد ماه
+            html += `
+                <div class="symbol-footnote">
+                    <div class="footnote-marker">✦ نماد ماه</div>
+                    <div>
+                        <div class="footnote-title">${month.symbolTitle}</div>
+                        <div class="footnote-text">${month.symbolDesc}</div>
+                    </div>
+                </div>
+            `;
+
             calendarView.innerHTML = html;
         }
 
-        // Service Worker برای offline
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('data:text/javascript,self.addEventListener("install",e=>{self.skipWaiting()}),self.addEventListener("fetch",e=>{e.respondWith(fetch(e.request).catch(()=>caches.match(e.request)))})');
         }
